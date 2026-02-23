@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@Bizz</title>
+<script>
+(function(){
+  var path = location.pathname || '';
+  var base = path.split('/').filter(Boolean)[0];
+  var root = base ? '/' + base + '/' : '/';
+  location.replace(root + (location.hash || '#/'));
+})();
+</script>
+</head>
+<body>
+<p>Перенаправление… <a href="/">Перейти на главную</a></p>
+</body>
+</html>
