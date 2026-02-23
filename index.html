@@ -5,7 +5,12 @@
 (function(){
   var p = typeof location !== 'undefined' && location.pathname;
   if (location.protocol !== 'file:' && p && p !== '/' && p.length > 1) {
-    var base = p.replace(/\/?$/, '/');
+    var base;
+    if (/\/[^/]*\.[^/]*$/.test(p)) {
+      base = p.replace(/\/[^/]*$/, '/');
+    } else {
+      base = p.replace(/\/?$/, '/');
+    }
     document.write('<base href="' + base + '">');
   }
 })();
