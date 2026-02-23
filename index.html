@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@Bizz</title>
+<meta name="description" content="@Bizz — площадка предпринимателей: обсуждения, комментарии, знакомства.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff7f00' rx='6'/><text x='16' y='23' font-size='15' font-weight='bold' fill='%23fff' text-anchor='middle' font-family='system-ui,sans-serif'>Bizz</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+<button type="button" class="burger" id="burger" aria-label="Меню"></button>
+<div class="admin-dropdown-wrap hidden" id="auth-admin-wrap"><button type="button" class="admin-dropdown-btn" id="admin-dropdown-btn" aria-haspopup="true" aria-expanded="false">Admin</button><div class="admin-dropdown" id="admin-dropdown" aria-hidden="true"><button type="button" class="admin-dropdown-item admin-dropdown-off" id="admin-toggle" title="Режим администратора: вкл/выкл"></button><a href="#/admin" class="admin-dropdown-item" id="admin-panel-link" data-i18n="adminPanelTitle">Панель</a><a href="#/admin/registry" class="admin-dropdown-item" id="admin-registry-link" data-i18n="authRegistry">Реестр</a><a href="#/admin/verification" class="admin-dropdown-item" id="admin-verification-link" data-i18n="navVerification">Верификация</a><a href="#/admin/reports" class="admin-dropdown-item admin-reports-dropdown-item" id="admin-reports-link-dropdown" data-i18n="adminReports">Жалобы<span class="admin-reports-badge hidden" id="admin-reports-badge-dropdown"></span></a></div></div>
+<a href="#/" class="logo" data-tour="step-logo">@Bizz</a>
+<nav class="nav" data-tour="step-nav"><a href="#/categories" data-i18n="navCategories">Категории</a><a href="#/favorites" data-i18n="navFavorites">Избранное</a><a href="#/subscription" data-i18n="navSubscription">Подписка</a><a href="#" class="header-chats-link hidden" id="header-chats-link" data-i18n="chatsTitle">Чаты<span class="chats-badge hidden" id="chats-badge"></span></a></nav>
+<div class="header-search"><div class="search-input-wrap"><input type="search" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="Поиск..." autocomplete="off"><svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg></div><button type="button" id="search-btn" class="search-btn" title="Найти" aria-label="Найти"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg></button><a href="#/friends" class="header-friends-btn" id="header-friends-btn" title="Знакомства" aria-label="Знакомства"><span class="friends-badge hidden" id="friends-badge"></span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg></a></div>
+<div class="header-actions" id="header-actions">
+<span class="auth-links" id="auth-btns"><a href="#" class="auth-link" id="btn-login" data-i18n="authLogin">Войти</a><span class="auth-sep">·</span><a href="#" class="auth-link" id="btn-register" data-i18n="authRegister">Регистрация</a></span>
+<span class="auth-user hidden" id="auth-user" data-tour="step-profile"><span class="auth-user-name" id="auth-user-name"></span><span class="auth-user-balance" id="auth-user-balance"></span><span class="auth-user-badge" id="auth-user-badge"></span><a href="#/profile" class="auth-link" id="auth-profile-link" data-i18n="authProfile">Профиль</a><a href="#" class="auth-link btn-logout" id="btn-logout" data-i18n="authLogout">Выйти</a></span>
+<span class="header-actions-end"><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Тёмная тема" title="Тёмная тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364 2.636-1.591 1.591M21 12h-2.25m-.364 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg><svg class="theme-icon-moon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg></button><span class="lang-switcher"><button type="button" class="lang-btn" id="lang-btn" aria-haspopup="true">Язык</button><div class="lang-dropdown" id="lang-dropdown"><button type="button" class="lang-option" data-lang="ru">Русский</button><button type="button" class="lang-option" data-lang="en">English</button></div></span></span>
+</div>
+</div>
+</header>
+<div class="modal-overlay hidden" id="auth-modal">
+<div class="modal" id="auth-modal-inner">
+<button type="button" class="modal-close" id="auth-modal-close" aria-label="Закрыть"></button>
+<p class="auth-no-supabase hidden" id="auth-no-supabase">Для входа и регистрации подключите базу Supabase (файл config.js, useSupabase: true). См. SETUP-DATABASE.md</p>
+<div class="auth-tabs" id="auth-tabs"><button type="button" class="auth-tab active" data-tab="login" data-i18n="authTabLogin">Вход</button><button type="button" class="auth-tab" data-tab="register" data-i18n="authTabRegister">Регистрация</button></div>
+<div class="auth-panel active" id="auth-panel-login">
+<form class="auth-form" id="form-login">
+<label class="form-label" data-i18n="authEmail">Почта</label><input type="email" id="login-email" required placeholder="email@example.com">
+<label class="form-label" data-i18n="authPassword">Пароль</label><input type="password" id="login-password" required placeholder="Пароль">
+<div class="auth-error" id="login-error"></div>
+<button type="submit" class="btn-primary" data-i18n="authLogin">Войти</button>
+</form>
+</div>
+<div class="auth-panel" id="auth-panel-register">
+<form class="auth-form" id="form-register">
+<label class="form-label" data-i18n="authFirstName">Имя</label><input type="text" id="reg-first-name" required placeholder="Иван">
+<label class="form-label" data-i18n="authLastName">Фамилия</label><input type="text" id="reg-last-name" required placeholder="Иванов">
+<label class="form-label" data-i18n="authCompany">Компания</label><input type="text" id="reg-company" required placeholder="ООО Ромашка">
+<label class="form-label" data-i18n="authEmail">Почта</label><input type="email" id="reg-email" required placeholder="email@example.com">
+<label class="form-label" data-i18n="authPassword">Пароль</label><input type="password" id="reg-password" required minlength="8" placeholder="Минимум 8 символов" autocomplete="new-password">
+<ul class="auth-password-checklist" id="reg-password-checklist" aria-live="polite">
+<li id="reg-pw-len"><span class="check-icon"></span><span data-i18n="authPwMin8">Минимум 8 символов</span></li>
+<li id="reg-pw-upper"><span class="check-icon"></span><span data-i18n="authPwUpper">Заглавная буква</span></li>
+<li id="reg-pw-lower"><span class="check-icon"></span><span data-i18n="authPwLower">Строчная буква</span></li>
+<li id="reg-pw-special"><span class="check-icon"></span><span data-i18n="authPwSpecial">Специальный символ (!@#$% и т.п.)</span></li>
+</ul>
+<label class="form-label" data-i18n="authPasswordConfirm">Подтверждение пароля</label><input type="password" id="reg-password-confirm" required minlength="8" data-i18n-placeholder="authPasswordRepeat" placeholder="Повторите пароль" autocomplete="new-password">
+<label class="form-label" data-i18n="authSecretWord">Секретное слово</label><input type="text" id="reg-secret-word" required data-i18n-placeholder="authSecretPlaceholder" placeholder="Ваше слово для важных моментов">
+<div class="auth-error" id="register-error"></div>
+<div class="auth-success hidden" id="register-success"></div>
+<button type="submit" class="btn-primary" id="reg-submit-btn" data-i18n="authSubmitRegister">Зарегистрироваться</button>
+</form>
+</div>
+</div>
+</div>
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<div id="view-landing" class="view view-landing hidden">
+<div class="landing-bg"><div class="landing-bg-shapes"><div class="landing-shape" data-px="0.5"><span></span></div><div class="landing-shape" data-px="0.8"><span></span></div><div class="landing-shape" data-px="0.4"><span></span></div><div class="landing-shape" data-px="0.7"><span></span></div><div class="landing-shape" data-px="0.3"><span></span></div><div class="landing-shape" data-px="0.6"><span></span></div></div></div>
+<div class="landing-wrap">
+<div class="landing-hero">
+<div class="landing-brand">
+<div class="landing-logo" aria-hidden="true">G</div>
+<h1 class="landing-brand-name">@Bizz</h1>
+<p class="landing-title" data-i18n="landingHeadline">Сила предпринимателей</p>
+<p class="landing-subtitle" data-i18n="landingJoinToday">В одном сайте для тебя</p>
+</div>
+<div class="landing-content">
+<div class="landing-actions">
+<button type="button" class="landing-btn landing-btn-primary" id="landing-register-btn" data-i18n="landingRegister">Зарегистрироваться</button>
+<p class="landing-login-wrap"><span data-i18n="landingAlreadyRegistered">Уже зарегистрированы?</span> <button type="button" class="landing-login-link" id="landing-login-btn" data-i18n="landingLogIn">Войти</button></p>
+</div>
+<p class="landing-terms" data-i18n="landingTerms">Регистрируясь, вы соглашаетесь с Условиями предоставления услуг и Политикой конфиденциальности.</p>
+</div>
+</div>
+<div class="landing-preview">
+<h3 class="landing-preview-title" data-i18n="landingPreviewTitle">Как может выглядеть твой опыт на сайте</h3>
+<div class="landing-preview-feed">
+<div class="landing-preview-toolbar"><span class="landing-preview-tab active">Все</span><span class="landing-preview-tab">Подписки</span><div class="landing-preview-pills"><span class="landing-preview-pill active">Рекомендуемое</span><span class="landing-preview-pill">Новые</span></div></div>
+<div class="landing-preview-posts" id="landing-preview-posts">
+<div class="post-card landing-preview-post" role="button" tabindex="0"><div class="post-card-link"><div class="post-card-meta"><span class="post-card-category">Финансы</span><span class="post-card-author"><span class="avatar-wrap avatar-initial">О</span><span>Ольга К.</span></span><span class="post-card-date"></span></div><h2 class="post-card-title">Как масштабировать бизнес без привлечения инвесторов?</h2><p class="post-card-excerpt">Кто прошёл путь от выручки 1–3 млн до 10+ без внешних денег? Поделитесь реальным опытом: что помогло, какие ошибки избежать.</p><a href="#" class="post-card-read-more">Открыть →</a></div><div class="post-card-stats"><span class="stat-views">6 570 просмотров</span><span class="stat-comments">127 коммент.</span><span class="stat-reactions">1,3 тыс реакций</span></div></div>
+<div class="post-card landing-preview-post" role="button" tabindex="0"><div class="post-card-link"><div class="post-card-meta"><span class="post-card-category">Маркетинг</span><span class="post-card-author"><span class="avatar-wrap avatar-initial">А</span><span>Алексей М.</span></span><span class="post-card-date"></span></div><h2 class="post-card-title">Как привлечь первых клиентов без бюджета</h2><p class="post-card-excerpt">Делитесь опытом: что сработало в вашем стартапе на этапе поиска первых клиентов?</p><a href="#" class="post-card-read-more">Открыть →</a></div><div class="post-card-stats"><span class="stat-views">12 просмотров</span><span class="stat-comments">3 коммент.</span></div></div>
+<div class="post-card landing-preview-post" role="button" tabindex="0"><div class="post-card-link"><div class="post-card-meta"><span class="post-card-category">Продажи</span><span class="post-card-author"><span class="avatar-wrap avatar-initial">М</span><span>Мария К.</span></span><span class="post-card-date"></span></div><h2 class="post-card-title">Инструменты для автоматизации рутины</h2><p class="post-card-excerpt">Какие сервисы используете для учёта, CRM, рассылок? Рекомендации и подводные камни.</p><a href="#" class="post-card-read-more">Открыть →</a></div><div class="post-card-stats"><span class="stat-views">12 просмотров</span><span class="stat-comments">3 коммент.</span></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="welcome-banner hidden" id="welcome-banner"><div class="welcome-banner-inner"><span class="welcome-banner-text" data-i18n="welcomeBanner">Добро пожаловать в @Bizz! Обсуждайте темы, оставляйте комментарии и находите единомышленников.</span><button type="button" class="welcome-banner-close" id="welcome-banner-close" aria-label="Закрыть">×</button></div></div>
+<div class="breadcrumbs" id="breadcrumbs"></div>
+<main class="layout">
+<aside class="sidebar" id="sidebar" data-tour="step-sidebar">
+<div class="sidebar-title" data-i18n="sidebarCategories">Категории</div>
+<ul class="category-list" id="category-list"></ul>
+<div class="sidebar-trends-wrap" id="sidebar-trends-wrap"><div class="sidebar-trends-title" data-i18n="sidebarTrending">В тренде</div><ul class="sidebar-trends" id="sidebar-trends"></ul></div>
+<div class="sidebar-extra"><a href="#/favorites" class="sidebar-link" data-i18n="sidebarFavorites">Избранное</a><a href="#/drafts" class="sidebar-link" id="sidebar-drafts" data-i18n="sidebarDrafts">Мои черновики</a><a href="#/groups" class="sidebar-link" data-i18n="navGroups">Группы</a><a href="#/new" class="sidebar-link sidebar-new-post" data-i18n="sidebarNewPost">Новый пост</a></div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<div class="content">
+<div id="view-feed" class="view">
+<div class="feed-composer hidden" id="feed-composer" data-tour="step-feed">
+<div class="feed-composer-inner">
+<div class="feed-composer-head">
+<span class="feed-composer-avatar" id="feed-composer-avatar"></span>
+<span class="feed-composer-prompt" data-i18n="feedComposerPrompt">Чем хотите поделиться?</span>
+</div>
+<form class="feed-composer-form" id="feed-composer-form">
+<textarea class="feed-composer-text" id="feed-composer-text" rows="3" placeholder="" data-i18n-placeholder="feedComposerPrompt" maxlength="5000"></textarea>
+<div class="feed-composer-media-wrap hidden" id="feed-composer-media-wrap"><textarea id="feed-composer-media" class="feed-composer-media-input" rows="2" placeholder="https://..." maxlength="2000"></textarea></div>
+<div class="feed-composer-actions">
+<div class="feed-composer-left">
+<label class="feed-composer-anonymous-wrap"><input type="checkbox" id="feed-composer-anonymous" class="feed-composer-anonymous-check"> <span data-i18n="postAnonymousLabel">Анонимно</span></label>
+<button type="button" class="feed-composer-btn feed-composer-photo" id="feed-composer-photo-btn" title="Фото" aria-label="Фото"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span data-i18n="postMediaUrls">Фото</span></button>
+<select id="feed-composer-category" class="feed-composer-category" aria-label="Категория"></select>
+<div class="feed-composer-price-wrap hidden" id="feed-composer-price-wrap"><label class="feed-composer-price-label" data-i18n="postPrice">Цена поста (валюта)</label><input type="number" id="feed-composer-price" class="feed-composer-price-input" min="0" step="1" placeholder="0" value="0"><span class="feed-composer-price-hint" data-i18n="postPriceHint">Только для категории «Полезное». 0 = бесплатный пост.</span></div>
+<button type="button" class="feed-composer-draft-link" id="feed-composer-draft-link" data-i18n="postSaveDraft">Сохранить в черновики</button>
+</div>
+<button type="submit" class="feed-composer-publish" id="feed-composer-publish" data-i18n="postPublish">Опубликовать</button>
+</div>
+<div class="feed-composer-error auth-error" id="feed-composer-error"></div>
+</form>
+</div>
+</div>
+<div class="feed-toolbar">
+<div class="feed-toolbar-row"><div class="feed-tabs"><a href="#/" class="feed-tab active" data-feed-mode="all" data-i18n="feedFeedAll">Все</a><a href="#/following" class="feed-tab" data-feed-mode="following" data-i18n="feedFeedFollowing">Подписки</a></div><label class="feed-filter-mine hidden" id="feed-filter-mine-wrap"><input type="checkbox" id="feed-filter-mine"><span data-i18n="filterMyPosts">Мои посты</span></label></div>
+<div class="feed-sort-row"><span class="feed-sort-label" data-i18n="feedSortLabel">Сортировка:</span><div class="feed-sort-pills" id="feed-sort-pills"><button type="button" class="feed-sort-pill active" data-sort="recommended" data-i18n="feedSortRecommended">Рекомендуемое</button><button type="button" class="feed-sort-pill" data-sort="new" data-i18n="feedSortNew">Новые</button><button type="button" class="feed-sort-pill" data-sort="hot" data-i18n="feedSortHot">Популярные</button><button type="button" class="feed-sort-pill" data-sort="comments" data-i18n="feedSortComments">По комментариям</button><button type="button" class="feed-sort-pill" data-sort="views" data-i18n="feedSortViews">По просмотрам</button></div></div>
+<select id="sort" class="sort-select" aria-hidden="true" style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;"><option value="recommended">Рекомендуемое</option><option value="new">Сначала новые</option><option value="hot">По популярности</option><option value="comments">По комментариям</option><option value="views">По просмотрам</option></select>
+</div>
+<div class="post-list-wrap"><div class="post-list" id="post-list"></div><div class="feed-infinite-sentinel" id="feed-infinite-sentinel" aria-hidden="true"></div></div>
+</div>
+<div id="view-category" class="view hidden">
+<div class="feed-toolbar"><div class="toolbar-left"><span class="feed-title" id="category-feed-title"></span><select id="sort-cat" class="sort-select"><option value="recommended">Рекомендуемое</option><option value="new">Сначала новые</option><option value="hot">По популярности</option><option value="comments">По комментариям</option><option value="views">По просмотрам</option></select></div></div>
+<div class="post-list-wrap"><div class="post-list" id="post-list-category"></div><div class="feed-infinite-sentinel" id="category-infinite-sentinel" aria-hidden="true"></div></div>
+</div>
+<div id="view-post" class="view hidden">
+<div class="post-back"><a href="#" id="back-link" data-i18n="back">← Назад</a></div>
+<article class="post-full" id="post-full"></article>
+<div class="post-actions-row"><div class="post-reactions" id="post-reactions"></div><div class="post-actions-right"><div class="post-admin-bar hidden" id="post-admin-bar"><button type="button" class="btn-outline" id="admin-edit-post-btn" data-i18n="adminEditPost">Изменить пост</button><button type="button" class="btn-outline" id="publish-draft-post-btn" data-i18n="publishDraft" style="display:none">Опубликовать</button><button type="button" class="btn-outline danger" id="admin-delete-post-btn" data-i18n="adminDeletePost">Удалить пост</button></div><button type="button" class="fav-btn" id="fav-btn" title="В избранное"><svg class="fav-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg></button><button type="button" class="btn-share" id="post-share-btn" title="Поделиться" data-i18n-title="sharePost"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg></button></div></div>
+<div class="comments-block">
+<div class="comments-header"><h2 class="comments-title" data-i18n="comments">Комментарии</h2><div class="comments-sort-wrap"><span class="comments-sort-label" data-i18n="commentsSort">Сортировка:</span><select id="comments-sort" class="comments-sort-select" aria-label="Сортировка комментариев"><option value="new" data-i18n="commentsSortNew">Сначала новые</option><option value="old" data-i18n="commentsSortOld">Сначала старые</option><option value="useful" data-i18n="commentsSortUseful">По полезности</option></select></div><span class="comments-new-badge hidden" id="comments-new-badge"></span></div>
+<div class="comments-list" id="comments-list"></div>
+<div class="comment-verified-hint hidden" id="comment-verified-hint" data-i18n="commentVerifiedOnly">Оставить комментарий могут только верифицированные пользователи.</div>
+<h3 class="comment-form-title" id="comment-form-title" data-i18n="leaveComment">Оставить комментарий</h3>
+<form class="comment-form" id="comment-form" style="display:block">
+<input type="hidden" id="comment-parent-id" value="">
+<div class="comment-reply-to hidden" id="comment-reply-to"></div>
+<textarea id="comment-body" data-i18n-placeholder="commentPlaceholder" placeholder="Написать комментарий..." rows="3" required maxlength="2000"></textarea><span class="char-counter" id="comment-body-counter">0 / 2000</span>
+<div class="auth-error" id="comment-form-error"></div>
+<button type="submit" class="comment-submit" data-i18n="commentSubmit">Отправить</button>
+<p class="comment-mode-hint" id="comment-mode-hint" aria-live="polite"></p>
+</form>
+</div>
+</div>
+<div id="view-search" class="view hidden">
+<div class="feed-toolbar"><div class="toolbar-left"><span class="feed-title" id="search-result-title" data-i18n="searchResults">Результаты поиска</span></div><div class="search-filters" id="search-filters"><select id="search-filter-category" class="search-filter-select" data-i18n-title="filterCategory"><option value="">Все категории</option></select><input type="date" id="search-filter-date-from" class="search-filter-date" title="От даты" aria-label="От даты"><input type="date" id="search-filter-date-to" class="search-filter-date" title="До даты" aria-label="До даты"></div></div>
+<div class="post-list" id="post-list-search"></div>
+</div>
+<div id="view-favorites" class="view hidden">
+<div class="feed-toolbar"><div class="toolbar-left"><span class="feed-title" data-i18n="navFavorites">Избранное</span></div></div>
+<div class="post-list" id="post-list-favorites"></div>
+</div>
+<div id="view-drafts" class="view hidden">
+<div class="feed-toolbar"><div class="toolbar-left"><span class="feed-title" data-i18n="navDrafts">Мои черновики</span></div></div>
+<div class="post-list" id="post-list-drafts"></div>
+</div>
+<div id="view-subscription" class="view hidden">
+<div class="subscription-page">
+<div class="subscription-hero">
+<div class="subscription-hero-badge" data-i18n="subscriptionBadge">Безлимит</div>
+<h1 class="subscription-hero-title" data-i18n="subscriptionHeroTitle">Читайте всё. Без ограничений.</h1>
+<p class="subscription-hero-desc" data-i18n="subscriptionHeroDesc">Откройте доступ к сотням обсуждений от предпринимателей — опыт, инсайты и решения, которые работают.</p>
+</div>
+<ul class="subscription-benefits">
+<li class="subscription-benefit">
+<span class="subscription-benefit-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span>
+<span><strong data-i18n="subscriptionBenefit1Title">Неограниченный доступ</strong> — <span data-i18n="subscriptionBenefit1Text">открывайте любой пост, в любой момент</span></span>
+</li>
+<li class="subscription-benefit">
+<span class="subscription-benefit-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg></span>
+<span><strong data-i18n="subscriptionBenefit2Title">Эксклюзивный опыт</strong> — <span data-i18n="subscriptionBenefit2Text">идеи от тех, кто уже добился успеха</span></span>
+</li>
+<li class="subscription-benefit">
+<span class="subscription-benefit-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg></span>
+<span><strong data-i18n="subscriptionBenefit3Title">Сообщество</strong> — <span data-i18n="subscriptionBenefit3Text">обсуждайте и находите единомышленников</span></span>
+</li>
+<li class="subscription-benefit">
+<span class="subscription-benefit-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg></span>
+<span><strong data-i18n="subscriptionBenefit4Title">Группы</strong> — <span data-i18n="subscriptionBenefit4Text">создавайте группы для общения с предпринимателями</span></span>
+</li>
+</ul>
+<div class="subscription-card-wrap">
+<div class="subscription-card">
+<div class="subscription-card-badge" data-i18n="subscriptionPopular">Популярный выбор</div>
+<h2 class="subscription-card-title" data-i18n="subscriptionTitle">Подписка безлимит</h2>
+<p class="subscription-card-desc" data-i18n="subscriptionDesc">Читай все посты без ограничений. 2 бесплатных поста в месяц — этого мало? Подключай безлимит.</p>
+<div class="subscription-card-price-row">
+<span class="subscription-card-price-old" data-i18n="subscriptionPriceOld">813 ₽</span>
+<span class="subscription-card-price">690 ₽ <span class="subscription-card-price-period" data-i18n="subscriptionPricePeriod">в месяц</span></span>
+<span class="subscription-card-discount" data-i18n="subscriptionDiscount">−15%</span>
+</div>
+<button type="button" class="subscription-buy-btn" id="subscription-buy-btn" data-i18n="subscriptionBuy">Подключить</button>
+<p class="subscription-card-marketing" data-i18n="subscriptionMarketing">1 месяц в подарок не дарим — мы ценим свою платформу и развиваем её!</p>
+</div>
+</div>
+<p class="subscription-cta-text" data-i18n="subscriptionCtaText">Присоединяйтесь к предпринимателям, которые уже развивают свой бизнес вместе с @Bizz</p>
+</div>
+</div>
+<div id="view-privacy" class="view hidden">
+<h1 class="page-title" data-i18n="footerPrivacy">Политика конфиденциальности</h1>
+<div class="privacy-page content-block">
+<p data-i18n="privacyIntro">@Bizz собирает и обрабатывает данные пользователей в соответствии с законодательством. Мы используем данные для работы платформы, верификации и связи с вами.</p>
+<p><a href="#/">← Главная</a></p>
+</div>
+</div>
+<div id="view-new" class="view hidden">
+<div class="post-form-header"><h1 class="post-form-title" id="post-form-title" data-i18n="pageNewPost">Новый пост</h1><a href="#/" class="post-form-back" id="post-form-back" aria-label="Назад">←</a></div>
+<div class="auth-error" id="post-form-error"></div>
+<form class="post-form post-form-modern" id="post-form">
+<div class="post-form-row post-form-row-category"><label class="form-label" data-i18n="postCategory">Категория</label><select id="new-post-category" class="post-form-select" required></select></div>
+<div class="post-form-row post-form-row-title"><label class="form-label" data-i18n="postTitle">Заголовок</label><div class="post-form-input-wrap"><input type="text" id="new-post-title" class="post-form-input" data-i18n-placeholder="postTitlePlaceholder" placeholder="О чём пост?" required maxlength="300"><span class="char-counter char-counter-inline" id="new-post-title-counter">0 / 300</span></div></div>
+<div class="post-form-row post-form-row-body"><label class="form-label" data-i18n="postBody">Текст</label><div class="post-body-wrap"><div class="post-body-toolbar"><button type="button" class="toolbar-btn" id="post-body-bold" title="Жирный (Ctrl+B)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg></button><button type="button" class="toolbar-btn" id="post-body-italic" title="Курсив (Ctrl+I)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button><button type="button" class="toolbar-btn" id="post-body-link" title="Ссылка (Ctrl+K)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button><button type="button" class="toolbar-btn" id="post-body-ul" title="Список">•</button><button type="button" class="toolbar-btn" id="post-body-quote" title="Цитата">"</button><button type="button" class="toolbar-btn" id="post-body-code" title="Код"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></button></div><div class="post-form-textarea-wrap"><textarea id="new-post-body" class="post-form-textarea" data-i18n-placeholder="postBodyPlaceholder" placeholder="Опишите вопрос или тему... Можно использовать *курсив*, **жирный** и #хэштеги." rows="6" required maxlength="5000"></textarea><span class="char-counter char-counter-inline" id="new-post-body-counter">0 / 5000</span></div></div></div>
+<div class="post-form-row post-form-row-media"><details class="post-media-details"><summary class="post-media-summary" data-i18n="postMediaUrls">Фото или видео (URL, по одному на строку)</summary><textarea id="new-post-media" class="post-form-media" placeholder="https://..." rows="2" maxlength="2000"></textarea></details></div>
+<div class="post-form-row post-form-row-price hidden" id="new-post-price-wrap"><label class="form-label" data-i18n="postPrice">Цена поста (валюта)</label><input type="number" id="new-post-price" class="post-form-input" min="0" step="1" placeholder="0" value="0"><span class="post-form-price-hint" data-i18n="postPriceHint">Только для категории «Полезное». 0 = бесплатный пост.</span></div>
+<div class="post-form-row post-form-row-anonymous"><label class="post-form-check-wrap"><input type="checkbox" id="new-post-anonymous" class="post-form-check"> <span data-i18n="postAnonymousLabel">Опубликовать анонимно</span></label><p class="post-form-hint" data-i18n="postAnonymousHint">Автор не будет указан, пост не появится в вашем профиле.</p></div>
+<div class="new-post-author-wrap hidden" id="new-post-author-wrap"><label class="form-label" data-i18n="postAuthor">Автор</label><input type="text" id="new-post-author" class="post-form-input comment-author-input" maxlength="80" readonly></div>
+<div class="post-form-actions"><button type="submit" class="post-form-submit" data-i18n="postPublish">Опубликовать</button><button type="button" class="post-form-draft" id="new-post-draft-btn" data-i18n="postSaveDraft">Сохранить черновик</button></div>
+</form>
+</div>
+<div id="view-friends" class="view hidden">
+<h1 class="page-title" data-i18n="pageFriends">Знакомства</h1>
+<div class="friends-page">
+<div class="friends-search-card"><label class="form-label" data-i18n="friendsSearchLabel">Найти человека</label><div class="friends-search-row"><input type="text" id="friends-search-input" class="friends-search-input" data-i18n-placeholder="friendsSearchPlaceholder" placeholder="Имя, фамилия или компания"><button type="button" id="friends-search-btn" class="friends-search-btn btn-primary" data-i18n="searchBtn">Найти</button></div><p class="friends-results-title hidden" id="friends-results-title"></p><div class="friends-results" id="friends-results"></div><button type="button" class="friends-load-more btn-outline" id="friends-load-more-btn" data-i18n="friendsLoadMore" style="display:none">Ещё</button></div>
+<div class="friends-incoming-card"><h2 class="friends-section-title" data-i18n="friendsIncoming">Заявки вам</h2><div class="friends-incoming-list" id="friends-incoming-list"></div></div>
+</div>
+</div>
+<div id="view-groups" class="view hidden">
+<h1 class="page-title" data-i18n="groupsSearchTitle">Поиск групп</h1>
+<div class="groups-page">
+<div class="groups-search-card">
+<div class="groups-search-row">
+<svg class="groups-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+<input type="text" id="groups-search-input" class="groups-search-input" data-i18n-placeholder="groupsSearchPlaceholder" placeholder="Поиск групп..." autocomplete="off">
+<button type="button" id="groups-search-btn" class="groups-search-btn btn-primary" data-i18n="searchBtn">Найти</button>
+</div>
+</div>
+<div class="groups-results" id="groups-results"></div>
+</div>
+</div>
+<div id="view-categories" class="view hidden">
+<h1 class="page-title" data-i18n="pageCategories">Категории</h1>
+<div class="categories-grid" id="categories-grid"></div>
+</div>
+<div id="view-admin-dashboard" class="view hidden">
+<h1 class="page-title" data-i18n="adminPanelTitle">Панель управления</h1>
+<div class="admin-stats-bar" id="admin-stats-bar"></div>
+<div class="admin-recent-activity" id="admin-recent-activity"></div>
+<div class="admin-panel-grid" id="admin-panel-grid">
+<a href="#/admin/registry" class="admin-panel-card" data-i18n-title="authRegistry" title="Реестр"><span class="admin-panel-card-icon" aria-hidden="true">📋</span><span class="admin-panel-card-title" data-i18n="authRegistry">Реестр</span><span class="admin-panel-card-desc" data-i18n="adminPanelRegistryDesc">Аккаунты пользователей</span></a>
+<a href="#/admin/verification" class="admin-panel-card" data-i18n-title="navVerification" title="Верификация"><span class="admin-panel-card-icon" aria-hidden="true">✓</span><span class="admin-panel-card-title" data-i18n="navVerification">Верификация</span><span class="admin-panel-card-desc" data-i18n="adminPanelVerificationDesc">Заявки на верификацию</span></a>
+<a href="#/admin/reports" class="admin-panel-card admin-panel-card-reports" data-i18n-title="adminReports" title="Жалобы"><span class="admin-panel-card-icon" aria-hidden="true">⚖</span><span class="admin-panel-card-title" data-i18n="adminReports">Жалобы</span><span class="admin-panel-card-badge hidden" id="admin-panel-reports-badge"></span><span class="admin-panel-card-desc" data-i18n="adminPanelReportsDesc">Модерация жалоб</span></a>
+<a href="#" class="admin-panel-card admin-panel-chat-card admin-chat-link" id="admin-panel-chat-card" data-i18n-title="chatsAdmin" title="Админ чат"><span class="admin-panel-card-icon" aria-hidden="true">💬</span><span class="admin-panel-card-title" data-i18n="chatsAdmin">Админ чат</span><span class="admin-panel-card-desc" data-i18n="adminPanelChatDesc">Сообщения пользователей</span></a>
+<a href="#/admin/content" class="admin-panel-card" data-i18n-title="adminContent" title="Контент"><span class="admin-panel-card-icon" aria-hidden="true">📝</span><span class="admin-panel-card-title" data-i18n="adminContent">Контент</span><span class="admin-panel-card-desc" data-i18n="adminPanelContentDesc">Посты и модерация</span></a>
+</div>
+</div>
+<div id="view-admin" class="view hidden">
+<h1 class="page-title" data-i18n="pageRegistry">Реестр аккаунтов</h1>
+<div class="admin-tabs"><a href="#/admin" class="admin-tab-link" data-i18n="adminPanelTitle">Панель</a><a href="#/admin/registry" class="admin-tab-link active" data-i18n="authRegistry">Реестр</a><a href="#/admin/verification" class="admin-tab-link" data-i18n="navVerification">Верификация</a><a href="#/admin/reports" class="admin-tab-link admin-reports-link" id="admin-reports-link" data-i18n="adminReports">Жалобы<span class="admin-reports-badge hidden" id="admin-reports-badge"></span></a><a href="#/admin/content" class="admin-tab-link" data-i18n="adminContent">Контент</a><a href="#" class="admin-tab-link admin-chat-link" id="admin-chat-link" data-i18n="chatsAdmin">Админ чат</a></div>
+<div class="admin-list" id="admin-list"></div>
+<div class="admin-edit hidden" id="admin-edit"><h2 data-i18n="adminEdit">Редактирование</h2><form id="admin-edit-form"><input type="hidden" id="admin-edit-id"><label class="form-label" data-i18n="profileFirstName">Имя</label><input type="text" id="admin-edit-first"><label class="form-label" data-i18n="profileLastName">Фамилия</label><input type="text" id="admin-edit-last"><label class="form-label" data-i18n="profileCompany">Компания</label><input type="text" id="admin-edit-company"><label class="form-label" data-i18n="profileCompanyStage">Этап компании</label><select id="admin-edit-company-stage"><option value="">—</option><option value="idea">Идея</option><option value="startup_1_3">Стартап 1–3 года</option><option value="startup_3_5">Стартап 3–5 лет</option><option value="growth">Рост</option><option value="enterprise">Крупный бизнес</option><option value="other">Другое</option></select><label class="form-label" data-i18n="profileBalance">Баланс</label><input type="number" id="admin-edit-balance" min="0" step="1" placeholder="0"><label class="form-label" data-i18n="adminSubscriptionEnds">Подписка до</label><input type="datetime-local" id="admin-edit-subscription-ends"><label class="form-label" data-i18n="profileVerified">Верифицирован</label><input type="checkbox" id="admin-edit-verified"><button type="submit" class="btn-primary" data-i18n="profileSave">Сохранить</button></form><div class="admin-add-balance-wrap"><label class="form-label" data-i18n="adminAddBalance">Добавить валюту</label><input type="number" id="admin-add-balance-amount" min="1" step="1" placeholder="100"><button type="button" class="btn-outline" id="admin-add-balance-btn" data-i18n="adminAddBalanceBtn">Добавить</button></div></div>
+</div>
+<div id="view-admin-verification" class="view hidden">
+<h1 class="page-title" data-i18n="pageVerification">Верификация</h1>
+<p class="admin-verification-hint" data-i18n="verificationHint">Одобрите или отклоните заявки. При отклонении профиль пользователя удаляется.</p>
+<div class="admin-tabs"><a href="#/admin" class="admin-tab-link" data-i18n="adminPanelTitle">Панель</a><a href="#/admin/registry" class="admin-tab-link" data-i18n="authRegistry">Реестр</a><a href="#/admin/verification" class="admin-tab-link active" data-i18n="navVerification">Верификация</a><a href="#/admin/reports" class="admin-tab-link admin-reports-link" id="admin-reports-link-verification" data-i18n="adminReports">Жалобы<span class="admin-reports-badge hidden" id="admin-reports-badge-verification"></span></a><a href="#/admin/content" class="admin-tab-link" data-i18n="adminContent">Контент</a><a href="#" class="admin-tab-link admin-chat-link" id="admin-chat-link-verification" data-i18n="chatsAdmin">Админ чат</a></div>
+<div class="admin-list" id="admin-verification-list"></div>
+</div>
+<div id="view-admin-reports" class="view hidden">
+<h1 class="page-title" data-i18n="adminReports">Жалобы</h1>
+<div class="admin-tabs"><a href="#/admin" class="admin-tab-link" data-i18n="adminPanelTitle">Панель</a><a href="#/admin/registry" class="admin-tab-link" data-i18n="authRegistry">Реестр</a><a href="#/admin/verification" class="admin-tab-link" data-i18n="navVerification">Верификация</a><a href="#/admin/reports" class="admin-tab-link active" data-i18n="adminReports">Жалобы<span class="admin-reports-badge hidden" id="admin-reports-badge-reports"></span></a><a href="#/admin/content" class="admin-tab-link" data-i18n="adminContent">Контент</a><a href="#" class="admin-tab-link admin-chat-link" id="admin-chat-link-reports" data-i18n="chatsAdmin">Админ чат</a></div>
+<div class="admin-reports-filters"><button type="button" class="admin-reports-filter active" data-status="pending" data-i18n="adminReportsPending">Ожидают</button><button type="button" class="admin-reports-filter" data-status="reviewed" data-i18n="adminReportsReviewed">На рассмотрении</button><button type="button" class="admin-reports-filter" data-status="all" data-i18n="adminReportsAll">Все</button></div>
+<div class="admin-reports-list" id="admin-reports-list"></div>
+</div>
+<div id="view-admin-content" class="view hidden">
+<h1 class="page-title" data-i18n="adminContent">Контент</h1>
+<div class="admin-tabs"><a href="#/admin" class="admin-tab-link" data-i18n="adminPanelTitle">Панель</a><a href="#/admin/registry" class="admin-tab-link" data-i18n="authRegistry">Реестр</a><a href="#/admin/verification" class="admin-tab-link" data-i18n="navVerification">Верификация</a><a href="#/admin/reports" class="admin-tab-link admin-reports-link" data-i18n="adminReports">Жалобы</a><a href="#/admin/content" class="admin-tab-link active" data-i18n="adminContent">Контент</a><a href="#" class="admin-tab-link admin-chat-link" data-i18n="chatsAdmin">Админ чат</a></div>
+<p class="admin-verification-hint" data-i18n="adminContentHint">Последние посты. Откройте пост для редактирования или удаления (нужен включённый режим админа).</p>
+<div class="admin-content-list" id="admin-content-list"></div>
+</div>
+<div id="view-user-profile" class="view hidden">
+<div class="user-profile-page">
+<div class="user-profile-header" id="user-profile-header"></div>
+<div class="user-profile-stats" id="user-profile-stats"></div>
+<div class="user-profile-actions" id="user-profile-actions"></div>
+<h2 class="user-profile-posts-title" data-i18n="userProfilePosts">Посты участника</h2>
+<div class="post-list user-profile-posts-list" id="user-profile-posts-list"></div>
+</div>
+</div>
+<div id="view-profile" class="view hidden">
+<h1 class="page-title" data-i18n="pageProfile">Мой профиль</h1>
+<div class="profile-page">
+<nav class="profile-tabs" role="tablist">
+<button type="button" class="profile-tab active" data-profile-tab="personal" role="tab" aria-selected="true" id="profile-tab-personal" data-i18n="profileTabPersonal">Личные данные</button>
+<button type="button" class="profile-tab" data-profile-tab="security" role="tab" aria-selected="false" id="profile-tab-security" data-i18n="profileTabSecurity">Безопасность</button>
+<button type="button" class="profile-tab" data-profile-tab="achievements" role="tab" aria-selected="false" id="profile-tab-achievements" data-i18n="profileTabAchievements">Достижения</button>
+<button type="button" class="profile-tab" data-profile-tab="statistics" role="tab" aria-selected="false" id="profile-tab-statistics" data-i18n="profileTabStatistics">Статистика</button>
+</nav>
+<div class="profile-tab-panels">
+<div class="profile-tab-panel active" id="profile-panel-personal" role="tabpanel" aria-labelledby="profile-tab-personal">
+<div class="profile-card profile-card-main" id="profile-card"></div>
+<div class="profile-form-card"><h2 class="profile-form-title" data-i18n="profileEdit">Редактировать данные</h2><form class="profile-form" id="profile-edit-form"><label class="form-label" data-i18n="profileFirstName">Имя</label><input type="text" id="profile-first"><label class="form-label" data-i18n="profileLastName">Фамилия</label><input type="text" id="profile-last"><label class="form-label" data-i18n="profileCompany">Компания</label><input type="text" id="profile-company"><label class="form-label" data-i18n="profileCompanyStage">Этап компании</label><select id="profile-company-stage"><option value="">—</option><option value="idea" data-i18n="profileCompanyStageIdea">Идея</option><option value="startup_1_3" data-i18n="profileCompanyStageStartup13">Стартап 1–3 года</option><option value="startup_3_5" data-i18n="profileCompanyStageStartup35">Стартап 3–5 лет</option><option value="growth" data-i18n="profileCompanyStageGrowth">Рост</option><option value="enterprise" data-i18n="profileCompanyStageEnterprise">Крупный бизнес</option><option value="other" data-i18n="profileCompanyStageOther">Другое</option></select><label class="form-label" data-i18n="profilePhoto">Фото (URL)</label><input type="url" id="profile-avatar" placeholder="https://..."><label class="form-label" data-i18n="profileDob">Дата рождения</label><input type="date" id="profile-dob"><button type="submit" class="btn-primary" data-i18n="profileSave">Сохранить</button></form></div>
+</div>
+<div class="profile-tab-panel" id="profile-panel-security" role="tabpanel" aria-labelledby="profile-tab-security" hidden>
+<div class="profile-form-card"><h2 class="profile-form-title" data-i18n="profileChangePassword">Сменить пароль</h2><form class="profile-form" id="profile-password-form"><label class="form-label" data-i18n="profileCurrentPassword">Текущий пароль</label><input type="password" id="profile-current-password" autocomplete="current-password"><label class="form-label" data-i18n="profileNewPassword">Новый пароль</label><input type="password" id="profile-new-password" minlength="8" autocomplete="new-password"><ul class="auth-password-checklist" id="profile-password-checklist" aria-live="polite"><li id="profile-pw-len"><span class="check-icon"></span><span data-i18n="authPwMin8">Минимум 8 символов</span></li><li id="profile-pw-upper"><span class="check-icon"></span><span data-i18n="authPwUpper">Заглавная буква</span></li><li id="profile-pw-lower"><span class="check-icon"></span><span data-i18n="authPwLower">Строчная буква</span></li><li id="profile-pw-special"><span class="check-icon"></span><span data-i18n="authPwSpecial">Специальный символ (!@#$% и т.п.)</span></li></ul><label class="form-label" data-i18n="profileConfirmPassword">Подтвердите новый пароль</label><input type="password" id="profile-new-password-confirm" minlength="8" autocomplete="new-password"><div class="auth-error" id="profile-password-error"></div><button type="submit" class="btn-primary" data-i18n="profileSave">Сменить пароль</button></form></div>
+<div class="profile-form-card"><h2 class="profile-form-title" data-i18n="profileMfa">Двухфакторная аутентификация</h2><p class="profile-mfa-desc" data-i18n="profileMfaDesc">При включении 2FA при каждом входе на почту будет отправляться код, который нужно ввести.</p><div class="profile-mfa-toggle-wrap"><span class="profile-mfa-label" data-i18n="profileMfaEnabled">2FA включена</span><label class="profile-toggle"><input type="checkbox" id="profile-mfa-toggle"><span class="profile-toggle-slider"></span></label></div><div class="auth-error" id="profile-mfa-error"></div></div>
+<div class="profile-form-card"><h2 class="profile-form-title" data-i18n="profileChangeEmail">Сменить email</h2><form class="profile-form" id="profile-email-form"><label class="form-label" data-i18n="profileNewEmail">Новый email</label><input type="email" id="profile-new-email"><div class="auth-error" id="profile-email-error"></div><button type="submit" class="btn-primary" data-i18n="profileSave">Сменить email</button></form></div>
+<div class="profile-form-card profile-form-card-danger"><h2 class="profile-form-title" data-i18n="profileDeleteAccount">Удалить аккаунт</h2><p class="profile-delete-hint" data-i18n="profileDeleteAccountHint">Удаление аккаунта необратимо. Все ваши посты, комментарии и данные будут удалены.</p><button type="button" class="btn-outline danger profile-delete-account-btn" id="profile-delete-account-btn" data-i18n="profileDeleteAccount">Удалить аккаунт</button></div>
+</div>
+<div class="profile-tab-panel" id="profile-panel-achievements" role="tabpanel" aria-labelledby="profile-tab-achievements" hidden>
+<div class="profile-card profile-card-achievements"><h2 class="profile-form-title" data-i18n="profileStats">Активность</h2><div id="profile-stats" class="profile-stats"></div></div>
+</div>
+<div class="profile-tab-panel" id="profile-panel-statistics" role="tabpanel" aria-labelledby="profile-tab-statistics" hidden>
+<div class="profile-card profile-card-statistics"><h2 class="profile-form-title" data-i18n="profileStatistics">Статистика автора</h2><div class="profile-stats-summary" id="profile-stats-summary"></div><div class="profile-stats-chart-wrap" id="profile-stats-chart-wrap"></div></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fab-wrap hidden" id="fab-wrap"><a href="#/new" class="fab fab-new-post" id="fab-new-post" aria-label="Новый пост" title="Новый пост"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg></a></div>
+<div class="chat-backdrop hidden" id="chat-backdrop" aria-hidden="true"></div>
+<div class="chat-panel hidden" id="chat-panel" role="dialog" aria-label="Чаты">
+<div class="chat-panel-header"><span class="chat-panel-title" data-i18n="chatsTitle">Чаты</span><button type="button" class="chat-panel-close" id="chat-panel-close" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+<div class="chat-panel-list" id="chat-panel-list">
+<div class="chat-list-item active hidden" data-chat="admin" id="chat-item-admin"><span data-i18n="chatsAdmin">Администрация</span><span class="chat-list-badge hidden" id="chat-admin-badge"></span></div>
+<div class="chat-list-item" data-chat="ai" id="chat-item-ai"><span data-i18n="chatsAI">Чат с ИИ</span><span class="chat-ai-soon" data-i18n="chatsSoon">скоро</span></div>
+<div class="chat-list-groups-wrap"><span class="chat-list-friends-label" data-i18n="chatsGroups">Групповые чаты</span><button type="button" class="chat-create-group-btn hidden" id="chat-create-group-btn" data-i18n="chatsCreateGroup">+ Создать группу</button><div class="chat-list-groups" id="chat-list-groups"></div></div>
+<div class="chat-list-friends-wrap"><span class="chat-list-friends-label" data-i18n="chatsFriends">Друзья</span><div class="chat-list-friends" id="chat-list-friends"></div></div>
+</div>
+<div class="chat-panel-content">
+<div class="chat-view chat-view-admin" id="chat-view-admin"><div class="chat-view-title" data-i18n="chatsAdmin">Администрация</div><p class="chat-view-desc" data-i18n="chatsAdminDesc">Напишите администрации или просмотрите уведомления.</p><div class="chat-admin-for-user" id="chat-admin-for-user"><div class="chat-admin-notes"><form class="chat-notes-form" id="chat-admin-notes-form"><textarea id="chat-admin-notes-input" rows="2" maxlength="2000" data-i18n-placeholder="chatsAdminNotesPlaceholder" placeholder="Написать сообщение администрации..."></textarea><button type="submit" data-i18n="commentSubmit">Отправить</button></form><div class="chat-admin-notes-list" id="chat-admin-notes-list"></div></div></div><div class="chat-admin-for-admin hidden" id="chat-admin-for-admin"><div class="chat-admin-threads-wrap"><div class="chat-admin-threads-list" id="chat-admin-threads-list"></div><div class="chat-admin-thread-view hidden" id="chat-admin-thread-view"><div class="chat-admin-thread-header"><button type="button" class="chat-admin-back-btn" id="chat-admin-back-btn">← Назад</button><span id="chat-admin-thread-user-name"></span></div><div class="chat-admin-thread-messages" id="chat-admin-thread-messages"></div><form class="chat-admin-reply-form" id="chat-admin-reply-form"><input type="text" id="chat-admin-reply-input" placeholder="Ответить..." maxlength="2000"><button type="submit" data-i18n="commentSubmit">Отправить</button></form></div></div></div><div class="chat-notifications-list" id="chat-notifications-list"></div></div>
+<div class="chat-view chat-view-dm hidden" id="chat-view-dm"><div class="chat-dm-header"><a href="#" id="chat-dm-title" class="chat-dm-title-link" title="Открыть профиль"></a><span class="chat-dm-status" id="chat-dm-status"></span></div><div class="chat-messages-wrap"><div class="chat-messages" id="chat-messages"></div></div><div class="chat-send-area"><form class="chat-send-form" id="chat-send-form"><input type="text" id="chat-message-input" data-i18n-placeholder="chatsMessagePlaceholder" placeholder="Написать сообщение..." maxlength="2000" autocomplete="off"><button type="submit" class="chat-send-btn" aria-label="Отправить"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form></div></div>
+<div class="chat-view chat-view-ai hidden" id="chat-view-ai"><div class="chat-view-title" data-i18n="chatsAI">Чат с ИИ</div><p class="chat-view-desc" data-i18n="chatsAISoon">Скоро здесь можно будет общаться с нейросетью.</p></div>
+<div class="chat-view chat-view-group hidden" id="chat-view-group"><div class="chat-group-header"><span class="chat-group-title" id="chat-group-title"></span><div class="chat-group-header-actions"><button type="button" class="chat-group-requests-btn hidden" id="chat-group-requests-btn" title="Заявки на вступление">📋</button><button type="button" class="chat-group-members-btn" id="chat-group-members-btn" title="Участники">👥</button></div></div><div class="chat-group-join-requests-panel hidden" id="chat-group-join-requests-panel"><h4 class="chat-group-join-requests-title" data-i18n="groupJoinRequests">Заявки на вступление</h4><div class="chat-group-join-requests-list" id="chat-group-join-requests-list"></div></div><div class="chat-group-members-panel hidden" id="chat-group-members-panel"><div class="chat-group-members-list" id="chat-group-members-list"></div></div><div class="chat-messages-wrap"><div class="chat-messages" id="chat-group-messages"></div></div><div class="chat-send-area"><form class="chat-send-form" id="chat-group-send-form"><input type="text" id="chat-group-message-input" data-i18n-placeholder="chatsMessagePlaceholder" placeholder="Написать сообщение..." maxlength="2000" autocomplete="off"><button type="submit" class="chat-send-btn" aria-label="Отправить"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form></div></div>
+</div>
+</div>
+<div class="modal-overlay hidden" id="chat-create-group-modal">
+<div class="modal chat-create-group-modal"><button type="button" class="modal-close" id="chat-create-group-close" aria-label="Закрыть"></button><h3 class="chat-create-group-title" data-i18n="chatsCreateGroup">Создать групповой чат</h3><form id="chat-create-group-form"><div class="chat-create-group-field"><label class="form-label" data-i18n="chatsGroupTitle">Название чата</label><input type="text" id="chat-group-title-input" required maxlength="100" class="chat-create-group-input" data-i18n-placeholder="chatsGroupTitle" placeholder="Название чата"></div><div class="chat-create-group-field"><label class="form-label" data-i18n="groupDescription">Описание</label><textarea id="chat-group-desc-input" class="chat-create-group-input" rows="2" maxlength="300" data-i18n-placeholder="groupDescription" placeholder="Кратко о чём группа"></textarea></div><div class="chat-create-group-field"><label class="chat-create-group-check-wrap"><input type="checkbox" id="chat-group-is-open" class="chat-create-group-check"> <span data-i18n="groupOpenLabel">Открытая группа</span></label><p class="chat-create-group-hint" data-i18n="groupOpenHint">Другие смогут найти группу и подать заявку на вступление.</p></div><div class="chat-create-group-field"><label class="form-label" data-i18n="groupCategory">Категория</label><select id="chat-group-category-input" class="chat-create-group-input chat-create-group-select"></select></div><div class="chat-create-group-field"><label class="form-label" data-i18n="chatsSelectFriends">Выберите друзей</label><div class="chat-create-group-search-wrap"><input type="text" id="chat-create-group-search" class="chat-create-group-search" data-i18n-placeholder="chatsSearchFriend" placeholder="Поиск по имени или компании..." autocomplete="off"><svg class="chat-create-group-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg></div><div class="chat-create-group-friends" id="chat-create-group-friends"></div></div><button type="submit" class="btn-primary chat-create-group-submit" data-i18n="chatsCreateGroup">Создать</button></form></div>
+</div>
+<div class="modal-overlay hidden" id="balance-modal">
+<div class="modal balance-modal"><button type="button" class="modal-close" id="balance-modal-close" aria-label="Закрыть"></button><h3 class="balance-modal-title" data-i18n="balanceTopUpTitle">Пополнить баланс</h3><p class="balance-modal-hint" data-i18n="balanceTopUpHintText">Введите количество монет. 1 монета = 1 ₽. Платёжная система будет подключена позже.</p><form id="balance-topup-form"><label class="form-label" data-i18n="balanceTopUpAmount">Количество монет</label><input type="number" id="balance-topup-amount" min="1" value="100" placeholder="100"><div class="balance-topup-cost" id="balance-topup-cost">100 ₽</div><div class="balance-topup-error" id="balance-topup-error"></div><button type="submit" class="btn-primary balance-topup-submit" data-i18n="balanceTopUpBuy">Купить</button></form></div>
+</div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<button type="button" class="back-to-top hidden" id="back-to-top" aria-label="Наверх">↑</button>
+<div class="shortcuts-modal hidden" id="shortcuts-modal"><div class="shortcuts-modal-inner"><h3 data-i18n="shortcutsTitle">Горячие клавиши</h3><ul class="shortcuts-list"><li><kbd>Esc</kbd> — закрыть окно/чат</li><li><kbd>?</kbd> — эта подсказка</li></ul><button type="button" class="shortcuts-close" id="shortcuts-close">Закрыть</button></div></div>
+<footer class="footer">
+<div class="footer-inner">
+<a href="#/" class="footer-logo"><span class="footer-logo-icon" aria-hidden="true">@</span><span class="footer-logo-text">@Bizz</span></a>
+<span class="footer-copy">© <span id="footer-year">2025</span> @Bizz. <span data-i18n="footerRights">Все права защищены.</span></span>
+<span class="footer-legal">ИП Гросс Владислав Сергеевич, ИНН 561408391731</span>
+<a href="#/privacy" class="footer-policy" data-i18n="footerPrivacy">Политика конфиденциальности</a>
+</div>
+</footer>
+<script>window.BIZFORUM_CONFIG = window.BIZFORUM_CONFIG || {};</script>
+<script src="js/i18n.js"></script>
+<script src="js/moderation.js"></script>
+<script src="js/data.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+var cfg = window.BIZFORUM_CONFIG;
+if(cfg && cfg.useSupabase && cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY){
+function loadDataSupabase(){
+var s2 = document.createElement('script'); s2.src = 'js/data-supabase.js';
+s2.onload = function(){ if(window.BizForum && window.BizForum.onDataReady) window.BizForum.onDataReady(); };
+document.body.appendChild(s2);
+}
+var s1 = document.createElement('script');
+s1.src = 'js/vendor/supabase.min.js';
+s1.onload = loadDataSupabase;
+s1.onerror = function(){
+s1.onerror = null;
+s1.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+s1.onload = loadDataSupabase;
+s1.onerror = function(){
+s1.onerror = null;
+s1.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+s1.onload = loadDataSupabase;
+};
+};
+document.body.appendChild(s1);
+}
+})();
+</script>
+<script src="js/tour.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
