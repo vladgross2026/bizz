@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>
+(function(){
+  var p = typeof location !== 'undefined' && location.pathname;
+  if (location.protocol !== 'file:' && p && p !== '/' && p.length > 1) {
+    var base = p.replace(/\/?$/, '/');
+    document.write('<base href="' + base + '">');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>@Bizz</title>
