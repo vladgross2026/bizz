@@ -378,10 +378,15 @@ function isVerified(){
 return getUid().then(function(uid){ if(!uid) return false; return getProfile(uid).then(function(p){ return !!(p && p.verified); }); });
 }
 function signUpRegister(opts){
+var origin = (typeof location !== 'undefined' && location.origin) ? location.origin : '';
+var redirectTo = origin ? (origin + (location.pathname || '').replace(/\/?[^/]*$/, '/') + '#/') : undefined;
 return sb.auth.signUp({
 email: opts.email,
 password: opts.password,
-options: { data: { first_name: opts.first_name || '', last_name: opts.last_name || '', company: opts.company || '', secret_word: opts.secret_word || '' } }
+options: {
+  data: { first_name: opts.first_name || '', last_name: opts.last_name || '', company: opts.company || '', secret_word: opts.secret_word || '' },
+  emailRedirectTo: redirectTo
+}
 }).then(function(r){
 if(r.error) return Promise.reject(r.error);
 var user = r.data && r.data.user;
