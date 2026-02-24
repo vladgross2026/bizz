@@ -410,8 +410,8 @@ function activateSubscription(){ return getUid().then(function(uid){ if(!uid) re
 function usePostOpen(postId){ return sb.rpc('use_post_open', { p_post_id: postId }).then(function(r){ if(r.error){ if(r.error.message && r.error.message.indexOf('post_opens_limit') >= 0) return Promise.reject(new Error('post_opens_limit')); return Promise.reject(r.error); } var d = r.data || {}; return { ok: true, opensRemaining: (d.opens_remaining != null) ? parseInt(d.opens_remaining, 10) : 0 }; }); }
 function hasOpenedPost(postId){ return getUid().then(function(uid){ if(!uid) return false; return sb.rpc('has_opened_post', { p_post_id: postId }).then(function(r){ return !!(r.data === true); }).catch(function(){ return false; }); }); }
 function getOpenedPostIds(){ return getUid().then(function(uid){ if(!uid) return []; return sb.rpc('get_opened_post_ids').then(function(r){ if(r.error || !r.data) return []; return Array.isArray(r.data) ? r.data : []; }).catch(function(){ return []; }); }); }
-function adminAddBalance(userId, amount){ return sb.rpc('admin_add_balance', { p_user_id: userId, p_amount: parseInt(amount, 10) || 0 }).then(function(r){ if(r.error) return Promise.reject(r.error); return r; }); }
-function userTopupBalance(amount){ return sb.rpc('user_topup_balance', { p_amount: parseInt(amount, 10) || 0 }).then(function(r){ if(r.error) return Promise.reject(r.error); return r; }); }
+function adminAddBalance(userId, amount){ var n = parseInt(amount, 10); if(isNaN(n) || n === 0){ return Promise.reject(new Error('Сумма не должна быть нулевой (положительная — пополнение, отрицательная — списание)')); } return sb.rpc('admin_add_balance', { p_user_id: userId, p_amount: n }).then(function(r){ if(r.error) return Promise.reject(r.error); return r; }); }
+function userTopupBalance(amount){ var n = parseInt(amount, 10); if(isNaN(n) || n < 1){ return Promise.reject(new Error('Минимум 1 монета')); } return sb.rpc('user_topup_balance', { p_amount: n }).then(function(r){ if(r.error) return Promise.reject(r.error); return r; }); }
 window.BizForum.data = {
 getCategories: getCategories,
 getPosts: getPosts,
