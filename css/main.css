@@ -45,7 +45,20 @@ body.theme-dark .theme-toggle:hover .theme-icon-sun,body.theme-dark .theme-toggl
 .auth-link{font-size:.875rem;color:var(--text-muted);text-decoration:none;}
 .auth-link:hover{color:var(--accent);}
 .auth-sep{color:var(--text-muted);}
-.auth-user{display:flex;align-items:center;gap:12px;}
+.auth-user{display:flex;align-items:center;gap:12px;position:relative;}
+.header-notifications-btn{position:relative;width:40px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);}
+.header-notifications-btn:hover{color:var(--accent);background:var(--category-bg);}
+.header-notifications-btn svg{width:20px;height:20px;}
+.notifications-badge{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;font-size:10px;line-height:16px;text-align:center;background:var(--accent);color:#fff;border-radius:10px;}
+.notifications-badge.hidden{display:none;}
+.notifications-dropdown{position:absolute;right:0;top:100%;margin-top:6px;min-width:280px;max-width:360px;max-height:70vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:60;padding:8px 0;}
+.notifications-dropdown.hidden{display:none;}
+.auth-user.notifications-open .notifications-dropdown{display:block;}
+.notifications-dropdown-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);padding:8px 12px;}
+.notifications-dropdown-list{display:flex;flex-direction:column;}
+.notifications-dropdown-item{display:block;padding:10px 12px;font-size:.875rem;color:var(--text);text-decoration:none;border:none;background:transparent;width:100%;text-align:left;cursor:pointer;border-bottom:1px solid var(--border);}
+.notifications-dropdown-item:hover{background:var(--category-bg);color:var(--accent);}
+.notifications-dropdown-empty{padding:16px 12px;font-size:.875rem;color:var(--text-muted);margin:0;}
 .lang-switcher{position:relative;display:inline-flex;}
 .lang-btn{padding:6px 10px;border:1px solid var(--border);border-radius:0;background:var(--card);font-size:.8rem;color:var(--text-muted);cursor:pointer;}
 .lang-btn:hover{border-color:var(--accent);color:var(--accent);}
@@ -154,6 +167,14 @@ select option{background:var(--card);color:var(--text);}
 .post-list-wrap{display:flex;flex-direction:column;gap:14px;}
 .feed-infinite-sentinel{height:1px;visibility:hidden;}
 .feed-loading{padding:32px;text-align:center;color:var(--text-muted);font-size:.95rem;}
+.post-card-skeleton,.post-full-skeleton{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;}
+.post-card-skeleton .skeleton-line,.post-full-skeleton .skeleton-line{background:linear-gradient(90deg,var(--border) 25%,var(--category-bg) 50%,var(--border) 75%);background-size:200% 100%;animation:skeleton-shine .8s ease-in-out infinite;border-radius:4px;height:14px;}
+.post-card-skeleton .skeleton-title,.post-full-skeleton .skeleton-title{height:18px;max-width:85%;margin-bottom:12px;}
+.post-card-skeleton .skeleton-meta,.post-full-skeleton .skeleton-meta{height:12px;max-width:45%;margin-bottom:10px;}
+.post-card-skeleton .skeleton-excerpt,.post-full-skeleton .skeleton-excerpt{margin-bottom:8px;}
+.post-card-skeleton .skeleton-excerpt.short,.post-full-skeleton .skeleton-excerpt.short{max-width:60%;}
+.post-full-skeleton .skeleton-title{max-width:70%;}
+@keyframes skeleton-shine{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 .post-card{background:var(--card);border-radius:14px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--border);transition:box-shadow .25s,border-color .25s,transform .2s;position:relative;overflow:hidden;}
 .post-card-delete-btn{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:10px;background:transparent;color:var(--text-muted);cursor:pointer;transition:color .2s,background .2s;opacity:.7;}
 .post-card-delete-btn:hover{color:#b91c1c;background:rgba(185,28,28,.08);opacity:1;}
